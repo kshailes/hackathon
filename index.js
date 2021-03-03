@@ -1,4 +1,5 @@
 const express = require('express')
+const {query} = require('./mongodb.js')
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -20,20 +21,23 @@ const listOfMerchants = [
 ]
 
 
-function getDataForCategory(category) {
-    return listOfMerchants.filter(merchant =>
-        merchant.category === category
-    )
+function getDataForCategory(category, resultCallback) {
+    return query(category, resultCallback)
+    // return listOfMerchants.filter(merchant =>
+    //     merchant.category === category
+    // )
 }
 
 app.get("/category", (req, res) => {
     const category = req.query.category
     if (category) {
-        const merhcants = getDataForCategory(category)
-        console.log(listOfMerchants)
-        return res.status(200).json(merhcants)
+         getDataForCategory(category,(merchants) => {
+            res.status(200).json(merchants)
+        })
+        // console.log(listOfMerchants)
+        return
     }
-    res.status(404).send("not found")
+    res.status(404).send("Category not found")
 })
 
 app.get("*", (req, res) => {
