@@ -14,7 +14,7 @@ const callback = function (error, result, errorMessage) {
 }
 
 const query = function (category, resultCallback) {
-    MongoClient.connect(connectionUrl, {useNewUrlParser: true, useUnifiedTopology: true}, (error, client) => {
+    MongoClient.connect(connectionUrl, {useNewUrlParser: true}, (error, client) => {
         if (error) {
             return console.log("mongodb not connected!!")
         }
