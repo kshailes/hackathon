@@ -32,7 +32,11 @@ app.get("/category", (req, res) => {
     const category = req.query.category
     if (category) {
          getDataForCategory(category,(merchants) => {
-            res.status(200).json(merchants)
+             const responseData = {
+                 success: true,
+                 stores: merchants
+             }
+            res.status(200).json(responseData)
         })
         // console.log(listOfMerchants)
         return
