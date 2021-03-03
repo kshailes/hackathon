@@ -2,7 +2,7 @@ const mongodb = require('mongodb')
 const MongoClient = mongodb.MongoClient
 
 const herokuMongodbUri = process.env.MONGODB_URI
-const connectionUrl =  herokuMongodbUri
+const connectionUrl =  herokuMongodbUri || "mongodb://127.0.0.1:27017"
 const databaseName = "hack-db"
 const MerchantCollection = "merchant"
 
